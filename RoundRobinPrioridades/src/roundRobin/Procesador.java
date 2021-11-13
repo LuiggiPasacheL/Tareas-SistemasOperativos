@@ -1,10 +1,6 @@
 package roundRobin;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 public class Procesador {
 
     private Proceso[] procesos;
@@ -15,7 +11,6 @@ public class Procesador {
             procs[0].llegadaT = 0;
         }
         this.procesos = procs;
-        this.procesos[0].activo = true;
     }
     
     public void mostrarProcesos(){
@@ -45,27 +40,33 @@ public class Procesador {
             if(procesoFinal + 1 != procesos.length && t >= procesos[procesoFinal + 1].llegadaT){
                 procesoFinal++; //agregando proceso
             }
+            
             p = (p == procesoFinal ? 0 : p + 1);
             
+            //Solo los procesos activos pueden avanzar
+            if(procesos[p].activo){
+                 //avanzar
+                t += procesos[p].prioridad;
+                procesos[p].avanza();
+                procesos[p].disminuirPrioridad(RONDAS_MAX);
 
-            
-            //avanzar
-            t += procesos[p].prioridad;
-            procesos[p].avanza();
-            procesos[p].disminuirPrioridad(RONDAS_MAX);
-
-            //verificar si algun proceso ha terminado
-            if(procesos[p].debeTerminar()){
-                procesos[p].terminar(t);
+                //verificar si algun proceso ha terminado
+                if(procesos[p].debeTerminar()){
+                    procesos[p].terminar(t);
+                }
             }
+               
             
             terminado = true;
+            
+            //Si hay al menos un proceso activo entonces el round robin continúa
             for(Proceso pro : procesos){
                 if(pro.activo){
                     terminado = false;
                     break;
                 }
             }
+            
         }
     }
 

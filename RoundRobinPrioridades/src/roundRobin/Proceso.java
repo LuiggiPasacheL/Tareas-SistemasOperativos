@@ -1,10 +1,5 @@
 package roundRobin;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 public class Proceso {
 
     public int llegadaT;
@@ -12,21 +7,13 @@ public class Proceso {
     public int salidaT;
     public int prioridad;
 
-    public int permanenciaT = 0;
     public int turnos = 0;
     public int duracionActual = 0;
-    public boolean activo = false;
-
+    public boolean activo = true;//proceso activo = proceso no finalizado(sin tiempo de salida)
     public Proceso(int llegadaT, int duracion, int prioridad) {
         this.llegadaT = llegadaT;
         this.duracion = duracion;
         this.prioridad = prioridad;
-    }
-
-    public void reducirPrioridad() {
-        if (prioridad != 1 && permanenciaT % 2 != 0 && permanenciaT != 0) {
-            prioridad -= 1;
-        }
     }
 
     public int getDuracion() {
@@ -53,13 +40,6 @@ public class Proceso {
         this.llegadaT = llegadaT;
     }
 
-    public int getPresenteT() {
-        return permanenciaT;
-    }
-
-    public void setPresenteT(int presenteT) {
-        this.permanenciaT = presenteT;
-    }
 
     public int getSalidaT() {
         return salidaT;
@@ -69,7 +49,9 @@ public class Proceso {
         this.salidaT = salidaT;
     }
 
+
     public void avanza() {
+
         this.duracionActual += this.prioridad;
         this.turnos++;
     }
@@ -79,10 +61,6 @@ public class Proceso {
             this.prioridad--;
     }
 
-    public boolean validarAvance() {
-        return permanenciaT < duracion;
-    }
-    
     public boolean debeTerminar() {
         return duracionActual == duracion;
     }
@@ -97,9 +75,9 @@ public class Proceso {
     public String toString() {
         String mensaje;
         mensaje = 
-                "llegada = " + llegadaT + "\n" +
+                "tiempo de llegada = " + llegadaT + "\n" +
                 "duracion = " + duracionActual + "\n" +
-                "final = " + salidaT + "\n";
+                "tiempo de salida = " + salidaT + "\n";
         return mensaje;
     }
 }
