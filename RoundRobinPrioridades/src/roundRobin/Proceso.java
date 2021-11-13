@@ -5,27 +5,28 @@ package roundRobin;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 public class Proceso {
+
     public int llegadaT;
     public int duracion;
     public int salidaT;
     public int prioridad;
-    
+
     public int permanenciaT = 0;
     public int turnos = 0;
     public int duracionActual = 0;
     public boolean activo = false;
-    
-    public Proceso(int llegadaT, int duracion, int prioridad){
+
+    public Proceso(int llegadaT, int duracion, int prioridad) {
         this.llegadaT = llegadaT;
         this.duracion = duracion;
         this.prioridad = prioridad;
     }
-    
-    public void reducirPrioridad(){
-        if(prioridad != 1 && permanenciaT % 2 != 0 && permanenciaT != 0)
+
+    public void reducirPrioridad() {
+        if (prioridad != 1 && permanenciaT % 2 != 0 && permanenciaT != 0) {
             prioridad -= 1;
+        }
     }
 
     public int getDuracion() {
@@ -67,20 +68,38 @@ public class Proceso {
     public void setSalidaT(int salidaT) {
         this.salidaT = salidaT;
     }
-    
-    public void avanzar(){
-        int desfase;
-        if(validarAvance()){
-            permanenciaT = permanenciaT + prioridad;   
-        }else{
-            desfase = permanenciaT - duracion;
-            permanenciaT = permanenciaT - desfase;
-        }
-       
+
+    public void avanza() {
+        this.duracionActual += this.prioridad;
+        this.turnos++;
     }
     
-    public boolean validarAvance(){
+    public void disminuirPrioridad(final int RONDAS_MAXIMAS){
+        if(this.turnos % RONDAS_MAXIMAS == 0 && this.prioridad > 1)
+            this.prioridad--;
+    }
+
+    public boolean validarAvance() {
         return permanenciaT < duracion;
     }
     
+    public boolean debeTerminar() {
+        return duracionActual == duracion;
+    }
+    
+    public void terminar(int tiempo) {
+        activo = false;
+        salidaT = tiempo;
+        prioridad = 0;
+    }
+
+    @Override
+    public String toString() {
+        String mensaje;
+        mensaje = 
+                "llegada = " + llegadaT + "\n" +
+                "duracion = " + duracionActual + "\n" +
+                "final = " + salidaT + "\n";
+        return mensaje;
+    }
 }
