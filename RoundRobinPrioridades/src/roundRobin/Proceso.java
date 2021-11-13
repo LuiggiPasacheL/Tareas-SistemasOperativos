@@ -6,10 +6,10 @@ public class Proceso {
     public int duracion;
     public int salidaT;
     public int prioridad;
-
     public int turnos = 0;
     public int duracionActual = 0;
     public boolean activo = true;//proceso activo = proceso no finalizado(sin tiempo de salida)
+    
     public Proceso(int llegadaT, int duracion, int prioridad) {
         this.llegadaT = llegadaT;
         this.duracion = duracion;
