@@ -3,7 +3,7 @@ package roundRobin;
 
 public class main {
     public static void main(String[] args) {
-        // Tllegada Duracion Prioridad
+        // (Tllegada, Duracion, Prioridad)
         Proceso p1 = new Proceso(0, 15, 2);     
         Proceso p2 = new Proceso(5, 14, 3); 
         Proceso p3 = new Proceso(8, 13, 1);
