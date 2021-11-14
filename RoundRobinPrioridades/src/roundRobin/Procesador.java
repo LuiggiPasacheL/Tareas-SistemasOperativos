@@ -86,5 +86,17 @@ public class Procesador {
             terminado = debeFinalizar();
         }
     }
+    
+    public String[] devolverSalidas(){
+        String[] salidas = new String[]{
+            String.valueOf(procesos[0].getSalidaT()), 
+            String.valueOf(procesos[1].getSalidaT()),
+            String.valueOf(procesos[2].getSalidaT()), 
+            String.valueOf(procesos[3].getSalidaT()), 
+            String.valueOf(procesos[4].getSalidaT())
+        };
+        
+        return salidas;
+    }
 
 }
