@@ -561,7 +561,7 @@ public class InterfazRR extends javax.swing.JFrame {
 
         p1Llegada.getAccessibleContext().setAccessibleName("");
 
-        jTabbedPane1.addTab("Menú1", jPanel1);
+        jTabbedPane1.addTab("Asignador", jPanel1);
 
         jLabel18.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel18.setText("Simulador Asignación de Procesos");
@@ -922,7 +922,7 @@ public class InterfazRR extends javax.swing.JFrame {
                 .addGap(33, 33, 33))
         );
 
-        jTabbedPane1.addTab("Menú2", jPanel2);
+        jTabbedPane1.addTab("Ejemplo", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -953,30 +953,72 @@ public class InterfazRR extends javax.swing.JFrame {
 
         try {
 
+            int p1LlegadaT = Integer.parseInt(p1Llegada.getText());
+            int p1DuracionT = Integer.parseInt(p1Duracion.getText());
+            int p1PrioridadN = Integer.parseInt(p1Prioridad.getText());
+
+            int p2LlegadaT = Integer.parseInt(p2Llegada.getText());
+            int p2DuracionT = Integer.parseInt(p2Duracion.getText());
+            int p2PrioridadN = Integer.parseInt(p2Prioridad.getText());
+
+            int p3LlegadaT = Integer.parseInt(p3Llegada.getText());
+            int p3DuracionT = Integer.parseInt(p3Duracion.getText());
+            int p3PrioridadN = Integer.parseInt(p3Prioridad.getText());
+
+            int p4LlegadaT = Integer.parseInt(p4Llegada.getText());
+            int p4DuracionT = Integer.parseInt(p4Duracion.getText());
+            int p4PrioridadN = Integer.parseInt(p4Prioridad.getText());
+
+            int p5LlegadaT = Integer.parseInt(p5Llegada.getText());
+            int p5DuracionT = Integer.parseInt(p5Duracion.getText());
+            int p5PrioridadN = Integer.parseInt(p5Prioridad.getText());
+
+            System.out.println("--------------------");
+            System.out.println(p1LlegadaT);
+            System.out.println(p1DuracionT);
+            System.out.println(p1PrioridadN);
+            System.out.println("--------------------");
+            System.out.println(p2LlegadaT);
+            System.out.println(p2DuracionT);
+            System.out.println(p2PrioridadN);
+            System.out.println("--------------------");
+            System.out.println(p3LlegadaT);
+            System.out.println(p3DuracionT);
+            System.out.println(p3PrioridadN);
+            System.out.println("--------------------");
+            System.out.println(p4LlegadaT);
+            System.out.println(p4DuracionT);
+            System.out.println(p4PrioridadN);
+            System.out.println("--------------------");
+            System.out.println(p5LlegadaT);
+            System.out.println(p5DuracionT);
+            System.out.println(p5PrioridadN);
+            System.out.println("--------------------");
+            
             Proceso p1 = new Proceso(
-                    Integer.parseInt(p1Llegada.getText()),
-                    Integer.parseInt(p1Duracion.getText()),
-                    Integer.parseInt(p1Prioridad.getText())
+                    p1LlegadaT,
+                    p1DuracionT,
+                    p1PrioridadN
             );
             Proceso p2 = new Proceso(
-                    Integer.parseInt(p2Llegada.getText()),
-                    Integer.parseInt(p2Duracion.getText()),
-                    Integer.parseInt(p2Prioridad.getText())
+                    p2LlegadaT,
+                    p2DuracionT,
+                    p2PrioridadN
             );
             Proceso p3 = new Proceso(
-                    Integer.parseInt(p3Llegada.getText()),
-                    Integer.parseInt(p3Duracion.getText()),
-                    Integer.parseInt(p3Prioridad.getText())
+                    p3LlegadaT,
+                    p3DuracionT,
+                    p3PrioridadN
             );
             Proceso p4 = new Proceso(
-                    Integer.parseInt(p4Llegada.getText()),
-                    Integer.parseInt(p4Duracion.getText()),
-                    Integer.parseInt(p4Prioridad.getText())
+                    p4LlegadaT,
+                    p4DuracionT,
+                    p4PrioridadN
             );
             Proceso p5 = new Proceso(
-                    Integer.parseInt(p5Llegada.getText()),
-                    Integer.parseInt(p5Duracion.getText()),
-                    Integer.parseInt(p5Prioridad.getText())
+                    p5LlegadaT,
+                    p5DuracionT,
+                    p5PrioridadN
             );
 
             Proceso[] procesos = new Proceso[]{p1, p2, p3, p4, p5};
@@ -992,8 +1034,9 @@ public class InterfazRR extends javax.swing.JFrame {
             p3Salida.setText(salidas[2]);
             p4Salida.setText(salidas[3]);
             p5Salida.setText(salidas[4]);
-        } catch (Exception e) {
             
+        } catch (Exception e) {
+
             e.printStackTrace();
             JOptionPane.showMessageDialog(jMenu1,
                     "Ha ocurrido un error vuelva a ingresar los datos", "Error", 0);
@@ -1132,6 +1175,7 @@ public class InterfazRR extends javax.swing.JFrame {
         Procesador procesador = new Procesador(procesos);
         procesador.roundRobin();
         String[] salidas = procesador.devolverSalidas();
+        procesador.mostrarProcesos();
 
         p1Ejemplo.setText(salidas[0]);
         p2Ejemplo.setText(salidas[1]);
