@@ -51,39 +51,41 @@ public class Procesador {
     }
 
     public void roundRobin() {
-        //agregar accion de procesador aca
-        int t = 0;
-        int p = 0; //turno 1
+        
+        int momento = 0;
+        int procesoActual = 0;
+        int cantidadProcesosTerminados = 0;
 
         boolean terminado = false;
 
         while (!terminado) {
 
-            mostrarTurnoActual(p, t, procesoFinal);
+            mostrarTurnoActual(procesoActual, momento, procesoFinal);
 
             //siguiente proceso
-            p = siguienteProceso(t, p);
+            procesoActual = siguienteProceso(momento, procesoActual);
 
             //Solo los procesos activos pueden avanzar
-            if (procesos[p].isActivo()) {
+            if (procesos[procesoActual].isActivo()) {
 
                 //avanzar
-                t += procesos[p].getPrioridad();
-                procesos[p].avanza();
+                momento += procesos[procesoActual].getPrioridad();
+                procesos[procesoActual].avanza();
 
                 //verificar si se debe disminuir prioridad
-                if (procesos[p].debeDisminuirPrioiridad(RONDAS_MAX)) {
-                    procesos[p].disminuirPrioridad();
+                if (procesos[procesoActual].debeDisminuirPrioiridad(RONDAS_MAX)) {
+                    procesos[procesoActual].disminuirPrioridad();
                 }
 
                 //verificar si algun proceso ha terminado
-                if (procesos[p].debeTerminar()) {
-                    procesos[p].terminar(t);
+                if (procesos[procesoActual].debeTerminar()) {
+                    procesos[procesoActual].terminar(momento);
+                    cantidadProcesosTerminados++;
                 }
             }
 
-            //Si hay al menos un proceso activo entonces el round robin continúa
-            terminado = debeFinalizar();
+            //Si los la cantidad de procesos terminados es igual al numero de procesos se termina
+            terminado = (cantidadProcesosTerminados == procesos.length);
         }
     }
     

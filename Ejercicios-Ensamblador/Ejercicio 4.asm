@@ -24,7 +24,7 @@ E2: mov al, [si]
     mov bl, [si+1]
     cmp al, bl
     jne E1
-    mov al, 07
+    mov al, 07 ; timbre en ascii
     mov [si],al      
     jmp E2
             

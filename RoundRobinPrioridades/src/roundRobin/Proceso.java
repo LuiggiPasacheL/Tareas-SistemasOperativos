@@ -78,7 +78,7 @@ public class Proceso {
     }
 
     public void disminuirPrioridad() {
-        this.prioridad--;
+        return;
     }
 
     public boolean debeTerminar() {
